@@ -1,2 +1,10 @@
-<h1>Pages#index</h1>
-<p>Find me in app/views/pages/index.html.erb</p>
+    <ul class="nav navbar-nav navbar-right">
+    <% if current_user.nil? %>
+    <%= link_to user_session_path do %>
+      <i class="glyphicon glyphicon-user"></i> Login
+      <%end%>
+      <% else %> 
+      <%= link_to destroy_user_session_path, method: :delete do %>
+      <i class="glyphicon glyphicon-log-in"></i> Logout
+  <%end%>
+       <% end %>
