@@ -1,9 +1,9 @@
 <br>
-<center><h1><b>The information gathered in the ICMoon's database will be sent to the Moon on January 1, 2019.</b></h1></center>
+<center><h1><b>Your accaunt <%= current_user.nickname%></b></h1></center>
+<center><p><h4><%= link_to "Edit", edit_user_registration_path%></h4></p></center>
 <br>
-<% @posts.each do |post| %>
-
-	<h1><%= link_to post.title, post_path(post.id) %></h1>
+<% @posts.where(user_id: current_user).each do |post| %>
+<h1><%= link_to post.title, post_path(post.id) %></h1>
 	<p><%= post.body %></p>
 	<p>Author: <%= post.user.nickname %> | Create at: <%= post.created_at %></p>
 	<% if current_user != nil and current_user.id == post.user_id %>
@@ -12,5 +12,4 @@
 	<%= link_to "Delete", post_path(post.id), data: {confirm: 'Rili deleted your post?'}, method: :delete %>
 	</p>
 	<%end%>
-	<hr>
-<%end%>
+	<%end%>
