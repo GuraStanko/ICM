@@ -1,5 +1,5 @@
 <br>
-<center><h1><b>Your accaunt <%= current_user.nickname%></b></h1></center>
+<center><h1><b>Your account <%= current_user.nickname%></b></h1></center>
 <center><p><h4><%= link_to "Edit", edit_user_registration_path%></h4></p></center>
 <br>
 <% @posts.where(user_id: current_user).each do |post| %>
