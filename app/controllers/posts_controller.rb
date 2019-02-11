@@ -9,6 +9,7 @@ class PostsController < ApplicationController
    @like = {}
    @likes = Like.sum(:like)
     @like = @likes
+    @post.update(visit: @post.visit+1)
   end
 
   def create
@@ -53,7 +54,7 @@ class PostsController < ApplicationController
 
   private
   	def post_params
-  		params.require(:post).permit(:user_id,:title,:body)
+  		params.require(:post).permit(:user_id,:title,:body, :visit)
 	
   	end
 

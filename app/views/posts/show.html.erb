@@ -1,7 +1,9 @@
 <h1><%= @post.title %></h1>
 <p><%= @post.body %></p>
-<%= @like %>
-<%= link_to  Like, like_post_path %>
+
+<%= link_to  "Likes:", like_post_path %>
+<%= @like %> | 
+Visits: <%= @post.visit %>
 
 
 <% if current_user != nil and current_user.id == @post.user_id %>

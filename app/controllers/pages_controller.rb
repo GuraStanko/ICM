@@ -2,6 +2,8 @@ class PagesController < ApplicationController
   def index
   	@users = User.all
   	@posts = Post.all
+    @likes = Like.sum(:like)
+    @like = @likes
   end
 
   def about

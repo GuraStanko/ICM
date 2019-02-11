@@ -6,6 +6,7 @@
 	<h1><%= link_to post.title, post_path(post.id) %></h1>
 	<p><%= post.body %></p>
 	<p>Author: <%= post.user.nickname %> | Create at: <%= post.created_at.strftime("%B %d, %Y") %></p>
+	<p> <%= link_to  "Like:", like_post_path(post.id) %> <%= @like %> | Visit: <%= post.visit %></p>
 	<% if current_user != nil and current_user.id == post.user_id %>
 	<p>
 	<%= link_to "Edit",  edit_post_path(post.id) %> or
