@@ -6,7 +6,9 @@ class PostsController < ApplicationController
   end 
 
   def show
-   
+   @like = {}
+   @likes = Like.sum(:like)
+    @like = @likes
   end
 
   def create
@@ -31,6 +33,22 @@ class PostsController < ApplicationController
   def update
   	@post.update(post_params)
   	redirect_to root_path
+  end
+
+  def like
+    @post = Post.find(params[:id])
+    @like = Like.where(user_id: current_user.id, post_id: @post.id).first
+    if @like == nil
+        @like = 1
+        Like.create(user_id: current_user.id, post_id: @post.id, like: @like)
+    else
+      if @like.like == 0
+        @like.update(like: @like.like+1)
+      else
+        @like.update(like: @like.like-1)
+      end
+    end
+    redirect_to post_path(@post.id)
   end
 
   private
