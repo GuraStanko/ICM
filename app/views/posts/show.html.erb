@@ -2,8 +2,7 @@
 <p><%= @post.body %></p>
 
 <%= link_to  "Likes:", like_post_path %>
-<%= @like %> | 
-Visits: <%= @post.visit %>
+<%= @like %> | Visits: <%= @post.visit %>
 
 
 <% if current_user != nil and current_user.id == @post.user_id %>

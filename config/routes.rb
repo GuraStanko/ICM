@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: 'pages#index'
+  root to: 'pages#index' do
+    member do
+      get :new
+    end
+  end
+  
   get "pages/about"
   get "pages/user"
 

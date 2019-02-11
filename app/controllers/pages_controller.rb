@@ -2,8 +2,11 @@ class PagesController < ApplicationController
   def index
   	@users = User.all
   	@posts = Post.all
-    @likes = Like.sum(:like)
-    @like = @likes
+    @like = []
+    @posts.each do |post|
+      @likes = Like.where(post_id: post.id).sum(:like)
+      @like[post.id] = @likes
+    end
   end
 
   def about
@@ -14,4 +17,7 @@ class PagesController < ApplicationController
   	@posts = Post.all
   end
 
+  def new
+    @posts = Post.order(:visit)
+  end
 end

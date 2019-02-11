@@ -6,8 +6,9 @@ class PostsController < ApplicationController
   end 
 
   def show
+  @post = Post.find(params[:id])
    @like = {}
-   @likes = Like.sum(:like)
+   @likes = Like.where(post_id: @post.id).sum(:like)
     @like = @likes
     @post.update(visit: @post.visit+1)
   end
@@ -49,7 +50,7 @@ class PostsController < ApplicationController
         @like.update(like: @like.like-1)
       end
     end
-    redirect_to post_path(@post.id)
+    redirect_back(fallback_location: root_path)
   end
 
   private
