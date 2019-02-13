@@ -17,7 +17,24 @@ class PagesController < ApplicationController
   	@posts = Post.all
   end
 
-  def new
-    @posts = Post.order(:visit)
+  def newp
+    @users = User.all
+    @posts = Post.order('created_at DESC')
+    @like = []
+    @posts.each do |post|
+      @likes = Like.where(post_id: post.id).sum(:like)
+      @like[post.id] = @likes
+    end
   end
+
+  def visitp
+    @users = User.all
+    @posts = Post.order(visit: :desc)
+    @like = []
+    @posts.each do |post|
+      @likes = Like.where(post_id: post.id).sum(:like)
+      @like[post.id] = @likes
+    end
+  end
+
 end

@@ -1,0 +1,19 @@
+<br>
+<center><h1><b>The information gathered in the ICMoon's database will be sent to the Moon on January 1, 2020.</b></h1></center>
+Filter: <%= link_to "Old posts",root_path %> | <%= link_to "New posts",pages_newp_path %> | <%= link_to "Visit",pages_visitp_path %>
+<br>
+<% @posts.each do |post| %>
+
+	
+	<h1><%= link_to post.title, post_path(post.id) %></h1>
+	<p><%= post.body %></p>
+	<p>Author: <%= post.user.nickname %> | Create at: <%= post.created_at.strftime("%B %d, %Y") %></p>
+	<p> <%= link_to  "Like:", like_post_path(post.id) %> <%= @like[post.id] %> | Visit: <%= post.visit %></p>
+	<% if current_user != nil and current_user.id == post.user_id %>
+	<p>
+	<%= link_to "Edit",  edit_post_path(post.id) %> or
+	<%= link_to "Delete", post_path(post.id), data: {confirm: 'Rili deleted your post?'}, method: :delete %>
+	</p>
+	<%end%>
+	<hr>
+<%end%>
